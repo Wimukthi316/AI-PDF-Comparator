@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AI-Driven PDF Comparison Report</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+.header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+.header h1 { font-size: 2.5em; margin-bottom: 15px; }
+.header .subtitle { font-size: 1.1em; opacity: 0.9; margin: 8px 0; }
+.content { padding: 40px; }
+.section {
+    background: #f8f9fa;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    border-left: 5px solid #3498db;
+}
+.section h2 { color: #2c3e50; font-size: 1.8em; margin-bottom: 20px; }
+.difference {
+    background: white;
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.difference h3 { color: #f39c12; margin-bottom: 15px; font-size: 1.3em; }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+th, td {
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    text-align: left;
+}
+th {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+tr:nth-child(even) { background: #f8f9fa; }
+tr:hover { background: #e9ecef; }
+.summary-box {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 20px 0;
+}
+.summary-box ul { list-style: none; margin-top: 15px; }
+.summary-box li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    font-size: 1.1em;
+}
+.summary-box li:last-child { border-bottom: none; }
+.code-block {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    margin: 15px 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.badge-success { background: #28a745; color: white; }
+.badge-warning { background: #ffc107; color: #000; }
+.badge-danger { background: #dc3545; color: white; }
+.alert-box {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+.image-info {
+    background: #ffebee;
+    border-left: 4px solid #e74c3c;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+.similarity-bar {
+    width: 100%;
+    height: 30px;
+    background: #e0e0e0;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+.similarity-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+.accuracy-note {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>AI-Driven PDF Comparison Report</h1>
+<p class="subtitle"><strong>P001 2.pdf</strong> vs <strong>P002 2.pdf</strong></p>
+</div>
+
+<div class="content">
+<div class="section">
+<h2>Executive Summary</h2>
+<div class="summary-box">
+<p><strong style="font-size: 1.3em;">Comparison Results:</strong></p>
+<ul>
+<li><strong>Metadata Differences:</strong> 6 fields</li>
+<li><strong>Text Differences:</strong> 1 page(s)</li>
+<li><strong>Table Differences:</strong> 2 table(s)</li>
+<li><strong>Image Differences:</strong> 1 image(s) <span class="badge badge-danger">DIFFERENT</span></li>
+</ul>
+</div>
+<div class="alert-box">
+<h3 style="color: #856404; margin-bottom: 10px;">Critical Finding:</h3>
+<p><strong>Product images are visually different!</strong></p>
+<p style="margin-top: 10px;">These PDFs represent <strong>two distinct products</strong>: Combination Spanner 17mm (PDF1) vs Engineers File Round 150mm (PDF2).</p>
+</div>
+</div>
+
+<div class="section">
+<h2>Text Differences</h2>
+<div class="difference">
+
+<div class="code-block">--- PDF1_Page1
++++ PDF2_Page1
+@@ -1,25 +1,26 @@
+-14 Aug 2019 12:55PM
+
++05 May 2020 03:15PM
+
+ Created via cki.skoocloud.com
+
+ 1 of 1
+
+ Product Specification PDF
+
+ Date
+
+-Correct as of 14th Aug 2019
+
++Correct as of 5th May 2020
+
+ Brand
+
+ C.K
+
+ Product
+
+-T4343M 17
+
++T0083 6
+
+ Description
+
+-Combination Spanner 17mm
+
++C.K Engineers File Round 150mm 2nd Cut
+
+ Barcode
+
+-5013969550603
+
++5013969390704
+
+ Commodity code
+
+-8204110000
+
++8203100000
+
+ Country of origin
+
+-TW
+
++PL
+
+ Features &
+
+ Benefits
+
+-~ Drop forged chrome vanadium steel, hardened & tempered for strength & durability ~ Heavy duty chrome plated for
+
+-corrosion resistance ~ 12° offset bi-hex ring ~ According to DIN 3113 ~ Size: 17 mm ~ Overall length: 210 mm
+
++~ Manufactured from special file steel, precision cut and hardened for outstanding performance and durability ~
+
++Ergonomic soft grip handle for superior comfort and control ~ Specially designed solid inner core for a safe and secure
+
++handle to tang bond ~ Profile: Round ~ Second cut ~ Tapered towards the point ~ Length: 150 mm
+
+ Product Weights and Measures
+
+ Product only
+
+ Product & primary
+
+@@ -29,44 +30,44 @@
+ Item Quantity
+
+ 1
+
+ 1
+
+-10
+
+-150
+
++3
+
++90
+
+ Width mm
+
+-37
+
+-37
+
+-80
+
+-300
+
++25
+
++27
+
++100
+
++450
+
+ Depth mm
+
+ 15
+
+ 15
+
+-240
+
++18
+
+ 350
+
+ Height mm
+
+-210
+
+-210
+
+-60
+
+-300
+
++240
+
++260
+
++290
+
++350
+
+ Weight
+
+-126
+
+-126
+
+-1294
+
+-20.1
+
++50
+
++54
+
++168
+
++5.8
+
+ Packaging Information
+
+ Card use
+
+ 0
+
+-Box
+
++0
+
+ Case
+
+ Card gms
+
+ 0
+
+-34
+
+-675
+
++0
+
++787.5
+
+ Plastic use
+
+-0
+
+-0
+
++Wallet
+
++Bag
+
+ -
+
+ Plastic gms
+
+-0
+
+-0
+
++4
+
++6
+
+ 0
+
+ Metal use
+
+ 0
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>Table Differences</h2>
+<div class="difference">
+<h3>Metadata Table <span class="badge badge-warning">6 cells</span></h3>
+<table>
+<thead>
+<tr>
+<th style="width: 280px;">Field</th>
+<th>P001 2.pdf</th>
+<th>P002 2.pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Barcode</strong></td>
+<td style="background: #ffebee;">5013969550603</td>
+<td style="background: #e8f5e9;">5013969390704</td>
+</tr>
+<tr>
+<td><strong>Commodity code</strong></td>
+<td style="background: #ffebee;">8204110000</td>
+<td style="background: #e8f5e9;">8203100000</td>
+</tr>
+<tr>
+<td><strong>Country of origin</strong></td>
+<td style="background: #ffebee;">TW</td>
+<td style="background: #e8f5e9;">PL</td>
+</tr>
+<tr>
+<td><strong>Date</strong></td>
+<td style="background: #ffebee;">Correct as of 14th Aug 2019</td>
+<td style="background: #e8f5e9;">Correct as of 5th May 2020</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td style="background: #ffebee;">Combination Spanner 17mm</td>
+<td style="background: #e8f5e9;">C.K Engineers File Round 150mm 2nd Cut</td>
+</tr>
+<tr>
+<td><strong>Product</strong></td>
+<td style="background: #ffebee;">T4343M 17</td>
+<td style="background: #e8f5e9;">T0083 6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="difference">
+<h3>Product Weights and Measures <span class="badge badge-warning">22 cells</span></h3>
+<table>
+<thead>
+<tr>
+<th style="width: 200px;">Measurement</th>
+<th style="width: 280px;">Column</th>
+<th>P001 2.pdf</th>
+<th>P002 2.pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Item Quantity</strong></td>
+<td><strong>Secondary packaging</strong></td>
+<td style="background: #ffebee;">10</td>
+<td style="background: #e8f5e9;">3</td>
+</tr>
+<tr>
+<td><strong>Item Quantity</strong></td>
+<td><strong>Transit packaging</strong></td>
+<td style="background: #ffebee;">150</td>
+<td style="background: #e8f5e9;">90</td>
+</tr>
+<tr>
+<td><strong>Width mm</strong></td>
+<td><strong>Product only</strong></td>
+<td style="background: #ffebee;">37</td>
+<td style="background: #e8f5e9;">25</td>
+</tr>
+<tr>
+<td><strong>Width mm</strong></td>
+<td><strong>Product & primary packaging</strong></td>
+<td style="background: #ffebee;">37</td>
+<td style="background: #e8f5e9;">27</td>
+</tr>
+<tr>
+<td><strong>Width mm</strong></td>
+<td><strong>Secondary packaging</strong></td>
+<td style="background: #ffebee;">80</td>
+<td style="background: #e8f5e9;">100</td>
+</tr>
+<tr>
+<td><strong>Width mm</strong></td>
+<td><strong>Transit packaging</strong></td>
+<td style="background: #ffebee;">300</td>
+<td style="background: #e8f5e9;">450</td>
+</tr>
+<tr>
+<td><strong>Depth mm</strong></td>
+<td><strong>Secondary packaging</strong></td>
+<td style="background: #ffebee;">240</td>
+<td style="background: #e8f5e9;">18</td>
+</tr>
+<tr>
+<td><strong>Height mm</strong></td>
+<td><strong>Product only</strong></td>
+<td style="background: #ffebee;">210</td>
+<td style="background: #e8f5e9;">240</td>
+</tr>
+<tr>
+<td><strong>Height mm</strong></td>
+<td><strong>Product & primary packaging</strong></td>
+<td style="background: #ffebee;">210</td>
+<td style="background: #e8f5e9;">260</td>
+</tr>
+<tr>
+<td><strong>Height mm</strong></td>
+<td><strong>Secondary packaging</strong></td>
+<td style="background: #ffebee;">60</td>
+<td style="background: #e8f5e9;">290</td>
+</tr>
+<tr>
+<td><strong>Height mm</strong></td>
+<td><strong>Transit packaging</strong></td>
+<td style="background: #ffebee;">300</td>
+<td style="background: #e8f5e9;">350</td>
+</tr>
+<tr>
+<td><strong>Weight</strong></td>
+<td><strong>Product only</strong></td>
+<td style="background: #ffebee;">126</td>
+<td style="background: #e8f5e9;">50</td>
+</tr>
+<tr>
+<td><strong>Weight</strong></td>
+<td><strong>Product & primary packaging</strong></td>
+<td style="background: #ffebee;">126</td>
+<td style="background: #e8f5e9;">54</td>
+</tr>
+<tr>
+<td><strong>Weight</strong></td>
+<td><strong>Secondary packaging</strong></td>
+<td style="background: #ffebee;">1294</td>
+<td style="background: #e8f5e9;">168</td>
+</tr>
+<tr>
+<td><strong>Weight</strong></td>
+<td><strong>Transit packaging</strong></td>
+<td style="background: #ffebee;">20.1</td>
+<td style="background: #e8f5e9;">5.8</td>
+</tr>
+<tr>
+<td><strong>Packaging Information</strong></td>
+<td><strong>Secondary packaging</strong></td>
+<td style="background: #ffebee;">Box</td>
+<td style="background: #e8f5e9;">0</td>
+</tr>
+<tr>
+<td><strong></strong></td>
+<td><strong>Secondary packaging</strong></td>
+<td style="background: #ffebee;">34</td>
+<td style="background: #e8f5e9;">0</td>
+</tr>
+<tr>
+<td><strong></strong></td>
+<td><strong>Transit packaging</strong></td>
+<td style="background: #ffebee;">675</td>
+<td style="background: #e8f5e9;">787.5</td>
+</tr>
+<tr>
+<td><strong></strong></td>
+<td><strong>Product & primary packaging</strong></td>
+<td style="background: #ffebee;">0</td>
+<td style="background: #e8f5e9;">Wallet</td>
+</tr>
+<tr>
+<td><strong></strong></td>
+<td><strong>Secondary packaging</strong></td>
+<td style="background: #ffebee;">0</td>
+<td style="background: #e8f5e9;">Bag</td>
+</tr>
+<tr>
+<td><strong></strong></td>
+<td><strong>Product & primary packaging</strong></td>
+<td style="background: #ffebee;">0</td>
+<td style="background: #e8f5e9;">4</td>
+</tr>
+<tr>
+<td><strong></strong></td>
+<td><strong>Secondary packaging</strong></td>
+<td style="background: #ffebee;">0</td>
+<td style="background: #e8f5e9;">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="section">
+<h2>Image Differences</h2>
+<div class="difference">
+<h3>Image 1: Product Photograph <span class="badge badge-danger">DIFFERENT</span></h3>
+<div class="image-info">
+<p><strong>Detection Status:</strong> Images are DIFFERENT</p>
+<p style="margin-top: 10px; padding: 10px; background: #fff3cd; border-radius: 5px;">
+<strong>Analysis:</strong> Different products: Combination Spanner vs Engineers File
+</p>
+<div style="margin-top: 20px;">
+<p style="margin-bottom: 10px;"><strong>Visual Analysis:</strong></p>
+<p style="font-size: 1.2em; margin-bottom: 10px;">
+<span style="color: #2ecc71; font-weight: 600;">Similarity: 43.8%</span> | 
+<span style="color: #e74c3c; font-weight: 600;">Difference: 56.2%</span>
+</p>
+<div class="similarity-bar">
+<div class="similarity-fill" style="width: 56.2%; background: linear-gradient(90deg, #e74c3c 0%, #f39c12 100%);">
+56.2% Different
+</div>
+</div>
+<div class="accuracy-note">
+<strong>Algorithm:</strong> Result uses <strong>Perceptual Hash</strong> algorithm (43.8% similar, 56.2% different), 
+most reliable for comparing different product types.
+</div>
+</div>
+<div style="margin-top: 15px;">
+<p><strong>Detection Scores:</strong></p>
+<ul style="margin-left: 20px; margin-top: 8px; line-height: 1.8;">
+<li>Average Hash: 1</li>
+<li><strong>Perceptual Hash: 36 (Primary)</strong></li>
+<li>Difference Hash: 9</li>
+<li>Combined Average: 15.33</li>
+</ul>
+</div>
+<div style="margin-top: 15px;">
+<p><strong>PDF1:</strong> 600x600 pixels (Page 1)</p>
+<p><strong>PDF2:</strong> 600x600 pixels (Page 1)</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>Conclusion</h2>
+<div style="line-height: 1.8; font-size: 1.05em;">
+<p style="margin-bottom: 15px;">
+This AI-powered automated comparison has successfully identified and categorized all significant differences 
+between the two PDF documents using advanced algorithms for text analysis, table structure comparison, 
+and perceptual image hashing.
+</p>
+
+<p style="margin-bottom: 15px;"><strong>Key Findings:</strong></p>
+<ul style="margin-left: 30px; margin-top: 10px; line-height: 2;">
+<li>The documents represent <strong>two completely different products</strong></li>
+<li>Product metadata shows <strong>6 distinct field differences</strong></li>
+<li>Tabular data has <strong>2 tables with variations</strong></li>
+<li><strong style="color: #e74c3c;">Visual content is DIFFERENT</strong> - confirming distinct products</li>
+</ul>
+
+<div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 5px solid #2196f3; border-radius: 8px;">
+<p style="margin-bottom: 10px;"><strong>Business Impact:</strong></p>
+<ul style="margin-left: 20px; line-height: 1.8;">
+<li>Automated version control for product specifications</li>
+<li>Quality assurance for technical documentation</li>
+<li>Rapid product specification comparison and validation</li>
+<li>Compliance verification across document versions</li>
+<li><strong>Time savings:</strong> Manual comparison would take 15-20 minutes, automated solution completes in seconds</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
