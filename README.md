@@ -231,43 +231,13 @@ The tool can be customized by modifying:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
-
-## 👤 Author
-
-**Your Name**
-
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-
----
-
 ## 🙏 Acknowledgments
 
 - PyMuPDF team for excellent PDF processing capabilities
 - pdfplumber for robust table extraction
 - imagehash library for perceptual hashing algorithms
 
----
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-
-1. Check the [Issues](https://github.com/yourusername/ai-pdf-comparator/issues) page
-2. Create a new issue with detailed description
-3. Contact via email: your.email@example.com
-
----
-
-## ⭐ Show Your Support
-
-If this project helped you, please give it a ⭐️!
-
----
 
 <div align="center">
-  
-**Made with ❤️ for automated document analysis**
 
 </div>
