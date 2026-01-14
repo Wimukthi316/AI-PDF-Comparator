@@ -203,19 +203,6 @@ imagehash>=4.3.0
 
 ---
 
-## 🎯 Roadmap
-
-- [ ] Add support for multi-page comparisons
-- [ ] Implement PDF merging and splitting
-- [ ] Add command-line interface (CLI)
-- [ ] Support for batch processing
-- [ ] Export to JSON/CSV formats
-- [ ] Add web-based UI
-- [ ] Docker containerization
-- [ ] API endpoint creation
-
----
-
 ## ⚙️ Configuration
 
 The tool can be customized by modifying:
@@ -224,12 +211,6 @@ The tool can be customized by modifying:
 - **Hash similarity threshold**: Default >3 for differences (adjustable)
 - **Table extraction strategy**: Lines-based with 5px tolerance
 - **Output file naming**: Default `pdf_compare_solution.html`
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
